@@ -1,0 +1,28 @@
+body {
+    background-color: lightblue;
+    color: maroon;
+    font-family: Arial;
+    margin: 0px;
+}
+main {
+    background-color: skyblue;
+    color: darkblue;
+    font-family: 'Times New Roman';
+    font-size: 18px;
+    padding: 20px;
+}
+footer {
+    background-color: steelblue;
+    color: aliceblue;
+    font-size: 14px;
+    padding: 10px;
+}
+header {
+    background-color: steelblue;
+    color: aliceblue;
+    font-size: 14px;
+    padding: 10px;
+}
+.link {
+    text-decoration: none;
+}
