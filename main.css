@@ -4,6 +4,7 @@ body {
     font-family: Arial;
     margin: 0px;
 }
+
 main {
     background-color: skyblue;
     color: darkblue;
@@ -11,32 +12,39 @@ main {
     font-size: 18px;
     padding: 20px;
 }
+
 footer {
     background-color: steelblue;
     color: aliceblue;
     font-size: 14px;
     padding: 10px;
 }
+
 header {
     background-color: steelblue;
     color: aliceblue;
     font-size: 14px;
     padding: 10px;
 }
+
 .link {
     text-decoration: none;
 }
+
 a {
     color: green;
     text-decoration: none;
     transition: 1s 2s;
 }
+
 a:link {
     color: blue;
 }
+
 a:visited {
     color: purple;
 }
+
 a:hover {
     color: red;
     text-decoration: underline;
@@ -44,7 +52,26 @@ a:hover {
     text-shadow: 1px 1px 0px black;
     transition: 0.3s;
 }
+
 a:active {
     color: black;
     opacity: 0.3;
+}
+
+div.menu {
+    border: 2px dashed steelblue;
+    border-radius: 5px;
+    width: 240px;
+    margin: 0 auto;
+    transition: 1s;
+}
+
+div.menu:hover {
+    border: 2px dashed aliceblue;
+    background-color: aliceblue;
+    box-shadow: 0 0 10px aliceblue;
+}
+
+h1 {
+    text-align: center;
 }
