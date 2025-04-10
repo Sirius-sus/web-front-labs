@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стародубцев Иван Алексеевич. Панель прогресса</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16.png">
+    <link rel="icon" href="../favicon-32x32.png">
+    <style>
+        .panel {
+            width: 300px;
+            margin: auto;
+            text-align: center;
+            border: 2px solid black;
+            padding: 10px;
+            
+            
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .progress {
+            width: 100%;
+            height: 20px;
+            border: 1px solid black;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background-color: steelblue;
+        }
+        .btn {
+            height: 40px;
+            margin-top: 10px;
+            padding: 10px;
+            color: steelblue;
+            font-size: 16px;
+            border-radius: 20px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .btn:hover {
+            font-weight: bold;
+            scale: 1.05;
+            cursor: pointer;
+        }
+        .btn:active {
+            box-shadow: none;
+        }
+        .action:active .progress-bar {
+            width: 100%;
+            transition: 5s;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 4
+    </header>
+
+    <main>
+        <div class="panel">
+            <div class="title">Степень прогресса</div>
+            <div class="action">
+                <div class="progress">
+                    <div class="progress-bar"></div>
+                </div>
+                <button class="btn">Нажмите и удерживайте</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Иван Стародубцев, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
