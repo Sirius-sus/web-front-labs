@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стародубцев Иван Алексеевич. Комикс</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16.png">
+    <link rel="icon" href="../favicon-32x32.png">
+    <style>
+        .callout {
+            background: white;
+            border: 2px solid black;
+            border-radius: 50%;
+            position: absolute;
+            font-size: 25px;
+            color: black;
+            box-shadow: 2px 2px 7px black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+        }
+
+        .lirililarila {
+            display: inline-block;
+            position: relative;
+        }
+
+        .lirililarila:hover .callout {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 4
+    </header>
+
+    <main>
+        <div class="lirililarila">
+            <img src="lirili-larila.jpg" width="500">
+            <div class="callout" style="width: 80px; height: 30px; top: 300px; left: 280px; transition: 0.3s;"></div>
+            <div class="callout" style="width: 120px; height: 45px; top: 267px; left: 320px; transition: 0.3s 0.1s;"></div>
+            <div class="callout" style="width: 160px; height: 60px; top: 225px; left: 370px; transition: 0.3s 0.2s;"></div>
+            <div class="callout" style="width: 220px; height: 100px; top: 155px; left: 440px; transition: 0.3s 0.3s;">Lirili Larila</div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Иван Стародубцев, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
