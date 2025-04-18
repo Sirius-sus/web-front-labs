@@ -128,6 +128,15 @@
             let msg = 'Приветствую вас на моей странице!\n© Иван Стародубцев, ФБИ-31, 2 курс, 2025';
             alert(msg);
         }
+        function changeOutput(buttonNum, backColor, textColor, borderRad, backWidth, strokeThickness, strokeType, strokeColor) {
+            let output = document.getElementById('output');
+            output.innerHTML = 'Нажата кнопка ' + buttonNum;
+            output.style.backgroundColor = backColor;
+            output.style.color = textColor;
+            output.style.borderRadius = borderRad;
+            output.style.width = backWidth;
+            output.style.border = strokeThickness + ' ' + strokeType + ' ' + strokeColor;
+        }
     </script>
     <style>
         .message {
@@ -138,6 +147,15 @@
             display: inline-block;
             padding: 10px;
             text-align: center;
+            align-items: center;
+        }
+        #output {
+            border: 1px solid;
+            width: 300px;
+            height: 40px;
+
+            display: flex;
+            justify-content: center;
             align-items: center;
         }
     </style>
@@ -156,6 +174,15 @@
         <div class="message" onclick="showDiv()">Найти отношение чисел</div>
         <div class="message" onclick="showPow()">Возвести в степень</div>
         <div class="message" onclick="showAuthor()">Узнать, кто автор страницы</div>
+
+        <div>
+            <input type="button" value="Кнопка 1" onclick="changeOutput(1, 'red', 'yellow', '10px', '250px', '5px', 'dashed', 'black')">
+            <input type="button" value="Кнопка 2" onclick="changeOutput(2, 'black', 'lime', '15px', '275px', '3px', 'double', 'lime')">
+            <input type="button" value="Кнопка 3" onclick="changeOutput(3, 'darkred', 'white', '20px', '287px', '4px', 'solid', 'red')">
+            <input type="button" value="Кнопка 4" onclick="changeOutput(4, 'beige', 'brown', '25px', '300px', '3px', 'double', 'brown')">
+        </div>
+
+        <div id="output"></div>
     </main>
 
     <footer style="cursor: pointer;" ondblclick="showMessage()">
