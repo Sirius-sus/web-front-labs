@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стародубцев Иван Алексеевич. Вывод суммы</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16.png">
+    <link rel="icon" href="../favicon-32x32.png">
+    <script>
+        function calculate() {
+            let inputA = document.getElementById('numberA');
+            let inputB = document.getElementById('numberB');
+            let inputC = document.getElementById('numberC');
+            let inputD = document.getElementById('numberD');
+            let inputE = document.getElementById('numberE');
+
+            let a = parseInt(inputA.value) || 0;
+            let b = parseInt(inputB.value) || 0;
+            let c = parseInt(inputC.value) || 0;
+            let d = parseInt(inputD.value) || 0;
+            let e = parseInt(inputE.value) || 0;
+
+            let sum = 100*a+80*b+150*c+300*d+300*e;
+
+            let output = document.getElementById('output');
+            output.innerHTML = "Общая цена: " + sum;
+        }
+        function reset() {
+            document.getElementById('numberA').value = null;
+            document.getElementById('numberB').value = null;
+            document.getElementById('numberC').value = null;
+            document.getElementById('numberD').value = null;
+            document.getElementById('numberE').value = null;
+
+            let output = document.getElementById('output');
+            output.innerHTML = "";
+        }
+    </script>
+    <style>
+        .cart {
+            border: 2px solid steelblue;
+            border-radius: 20px;
+            padding: 20px;
+            padding-top: 0px;
+            width: 300px;
+        }
+        .cart label {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header style="cursor: pointer;" onclick="showAuthor()">
+        НГТУ, ФБ, Лабораторная работа 5
+    </header>
+
+    <main>
+        <div class="cart">
+            <h1>Корзина товаров</h1>
+            <label>Яблоки (100р/шт): <input type="number" value="1" placeholder="Сколько яблок надо?" id="numberA"></label>
+            <label>Груши (80р/шт): <input type="number" value="2" placeholder="Сколько груш надо?" id="numberB"></label>
+            <label>Апельсины (150р/шт): <input type="number" value="3" placeholder="Сколько апельсинов надо?" id="numberC"></label>
+            <label>Дыни (300р/шт): <input type="number" value="4" placeholder="Сколько дынь надо?" id="numberD"></label>
+            <label>Арбузы (300р/шт): <input type="number" value="5" placeholder="Арбуз арбуз привет" id="numberE"></label>
+            <div>
+                <input type="button" value="Рассчитать" onclick="calculate()">
+                <input type="button" value="Очистить" onclick="reset()">
+            </div>
+            <div id="output" style="margin-top: 10px;"></div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Иван Стародубцев, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
