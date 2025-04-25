@@ -9,10 +9,42 @@
     <link rel="icon" href="../favicon-16x16.png">
     <link rel="icon" href="../favicon-32x32.png">
     <script>
-        
+        function showCoords() {
+            let x = this.event.x;
+            let y = this.event.y;
+            let div = document.getElementById('block');
+
+            div.innerHTML = '<b>x</b> = ' + x + 'px<br><b>y</b> = ' + y + 'px';
+
+            if(this.event.ctrlKey) {
+                div.style.color = 'red';
+                div.innerHTML = div.innerHTML + '<br>Нажата клавиша Ctrl'
+            } else {
+                div.style.color = 'black';
+            };
+            if(this.event.shiftKey) {
+                div.style.backgroundColor = 'beige';
+                div.innerHTML = div.innerHTML + '<br>Нажата клавиша Shift'
+            } else {
+                div.style.backgroundColor = 'aliceblue';
+            };
+            if(this.event.altKey) {
+                div.style.border = '2px double red';
+                div.innerHTML = div.innerHTML + '<br>Нажата клавиша Alt'
+            } else {
+                div.style.border = '2px solid steelblue';
+            };
+        }
     </script>
     <style>
-        
+        #block {
+            width: 500px;
+            height: 500px;
+            border: 2px solid steelblue;
+            background-color: aliceblue;
+            cursor: crosshair;
+            padding-left: 5px;
+        }
     </style>
 </head>
 <body>
@@ -21,7 +53,7 @@
     </header>
 
     <main>
-        
+        <div id="block" onmousemove="showCoords()"></div>
     </main>
 
     <footer>
