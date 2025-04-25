@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стародубцев Иван Алексеевич. Дополнительное задание</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16.png">
+    <link rel="icon" href="../favicon-32x32.png">
+    <script>
+        function showFilters() {
+            let x = this.event.x - 20;
+            let filterName = document.getElementById('filterName');
+            let intense = document.getElementById('intensity');
+
+            if(this.event.ctrlKey) {
+                filterName.innerHTML = 'brightness';
+                document.getElementById('filterImage').style.filter = 'brightness(' + x + '%)';
+                intense.innerText = x + '%';
+            } else if(this.event.shiftKey) {
+                filterName.innerHTML = 'contrast';
+                document.getElementById('filterImage').style.filter = 'contrast(' + x + '%)';
+                intense.innerText = x + '%';
+            } else if(this.event.altKey) {
+                filterName.innerHTML = 'saturate';
+                document.getElementById('filterImage').style.filter = 'saturate(' + x + '%)';
+                intense.innerText = x + '%';
+            } else {
+                filterName.innerHTML = 'blur';
+                document.getElementById('filterImage').style.filter = 'blur(' + x/25 + 'px)';
+                intense.innerText = x/25 + 'px';
+            };
+        }
+    </script>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 5
+    </header>
+
+    <main>
+        <div>
+            При наведении курсора активируется фильтр <b>blur</b><br>
+            При зажатом Ctrl - <b>brightness</b><br>
+            При зажатом Shift - <b>contrast</b><br>
+            При зажатом Alt - <b>saturate</b>
+        </div>
+        <div><img src="bombardiro-crocodilo.jpg" width="500px" style="margin-top: 20px;" id="filterImage" onmousemove="showFilters()"></div>
+        <div>
+            Текущий фильтр: <span id="filterName"></span><br>
+            Интенсивность: <span id="intensity"></span>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Иван Стародубцев, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
