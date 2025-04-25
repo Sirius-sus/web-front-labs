@@ -10,11 +10,23 @@
     <link rel="icon" href="../favicon-32x32.png">
     <script>
         function showMultipleTable () {
-            let tbl = document.getElementById('mtable');
-            tbl.innerHTML = '<h1>Таблица умножения</h1>';
-            for(i = 1; i <= 10; i++) {
-                let s = `<div>${i} * 7 = ${i*7}</div>`;
-                tbl.innerHTML += s;
+            let inputA = document.getElementById('numberA');
+            let inputB = document.getElementById('numberB');
+            let inputC = document.getElementById('numberC');
+
+            let a = parseInt(inputA.value);
+            let b = parseInt(inputB.value);
+            let c = parseInt(inputC.value);
+
+            if(b>c) {
+                alert("Начальное значение не может быть больше конечного");
+            } else {
+                let tbl = document.getElementById('mtable');
+                tbl.innerHTML = '<h1>Таблица умножения</h1>';
+                for(i = b; i <= c; i++) {
+                    let s = `<div>${i} * ${a} = ${i*a}</div>`;
+                    tbl.innerHTML += s;
+                }
             }
         }
     </script>
@@ -36,6 +48,11 @@
 
     <main>
         <div id="mtable"></div>
+        <hr style="border: 1px solid steelblue">
+        <label>Умножить на: <input type="number" id="numberA"></label><br>
+        <label>Начать с: <input type="number" id="numberB"></label><br>
+        <label>Закончить на: <input type="number" id="numberC"></label><br>
+        <input type="button" value="Таблица" onclick="showMultipleTable()">
     </main>
 
     <footer>
