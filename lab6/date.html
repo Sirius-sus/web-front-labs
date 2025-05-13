@@ -21,6 +21,27 @@
             <span class="title">Дата и время для китайской локали:</span> <span class="time">${ today.toLocaleString('zh-CN') }</span><br>
             `;
         }
+
+        function changeColors() {
+            const header = document.getElementsByTagName('header')[0];
+            const rgb = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+            header.style.color = rgb;
+        }
+
+        function startChangeColors() {
+            changeColors();
+            setInterval(changeColors, 1000);
+            timerNum = setInterval(changeColors, 1000);
+            document.getElementById('start-btn').disabled = true;
+            document.getElementById('stop-btn').disabled = false;
+        }
+
+        function stopChangeColors() {
+            clearInterval(timerNum);
+            document.getElementById('start-btn').disabled = false;
+            document.getElementById('stop-btn').disabled = true;
+        }
+
     </script>
     <style>
         .title {
@@ -34,6 +55,9 @@
             padding: 3px;
             border-radius: 6px;
         }
+        header {
+            transition: 0.5s;
+        }
     </style>
 </head>
 <body onload="showDate()">
@@ -43,6 +67,10 @@
 
     <main>
         <div id="current-date"></div>
+        <div>
+            <button onclick="startChangeColors()" id="start-btn">Старт</button>
+            <button onclick="stopChangeColors()" disabled id="stop-btn">Стоп</button>
+        </div>
     </main>
 
     <footer>
