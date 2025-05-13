@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стародубцев Иван Алексеевич. Дата-время</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16.png">
+    <link rel="icon" href="../favicon-32x32.png">
+    <script>
+        function showDate() {
+            let out = document.getElementById('current-date');
+            let today = new Date();
+            out.innerHTML = `
+            <span class="title">Дата и время для русской локали:</span> <span class="time">${ today.toLocaleString('ru-RU') }</span><br>
+            <span class="title">Дата и время для локали ЮАР:</span> <span class="time">${ today.toLocaleString('af-ZA') }</span><br>
+            <span class="title">Дата и время для локали Египта:</span> <span class="time">${ today.toLocaleString('ar-EG') }</span><br>
+            <span class="title">Дата и время для греческой локали:</span> <span class="time">${ today.toLocaleString('el-GR') }</span><br>
+            <span class="title">Дата и время для пакистанской локали:</span> <span class="time">${ today.toLocaleString('ur-PK') }</span><br>
+            <span class="title">Дата и время для китайской локали:</span> <span class="time">${ today.toLocaleString('zh-CN') }</span><br>
+            `;
+        }
+    </script>
+    <style>
+        .title {
+            font-weight: bold;
+            line-height: 2;
+        }
+        .time {
+            font-style: italic;
+            background-color: aliceblue;
+            color: steelblue;
+            padding: 3px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body onload="showDate()">
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+    </header>
+
+    <main>
+        <div id="current-date"></div>
+    </main>
+
+    <footer>
+        &copy; Иван Стародубцев, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
