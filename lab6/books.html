@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стародубцев Иван Алексеевич. Книги</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16.png">
+    <link rel="icon" href="../favicon-32x32.png">
+    <script src="books.js"></script>
+    <script>
+        function showBooks() {
+            const bookList = document.getElementById('bookList');
+            for(let i = 0; i < books.length; i++) {
+                let book = books[i];
+                let classes = 'book';
+                if (book.bestseller) {
+                    classes += ' bestseller';
+                };
+                if (!book.available) {
+                    classes += ' unavailable';
+                };
+                bookList.innerHTML += `
+                    <div class="${classes}">
+                        <b>${ book.author }.</b>
+                        <i>${ book.name }.</i>
+                        &mdash; ${ book.publicationYear }<br>
+                        Цена: <span class="price"> ${ book.price } рублей </span> ${ book.bestseller ? '<span class="bs">Бестселлер</span>' : '' }<br>
+                        ${!book.available ? 'Нет в наличии' : ''}
+                    </div>
+                `
+            }
+        }
+    </script>
+    <style>
+        .book {
+            padding: 10px;
+            margin: 10px 0px;
+            background-color: aliceblue;
+            border-radius: 10px;
+        }
+
+        .bestseller {
+            background-color: lightyellow;
+        }
+
+        .unavailable {
+            opacity: 0.5;
+            font-style: italic;
+            text-decoration: line-through;
+        }
+
+        .price {
+            color: slateblue;
+            font-weight: bold;
+        }
+
+        .bs {
+            color: red;
+            background-color: yellow;
+            padding: 3px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body onload="showBooks()">
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+    </header>
+
+    <main>
+        <h1>Список книг</h1>
+        <div id="bookList">
+        </div>
+    </main>
+
+    <footer>
+        &copy; Иван Стародубцев, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
