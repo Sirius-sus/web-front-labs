@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стародубцев Иван Алексеевич. Котировки акций компании ВТБ</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16.png">
+    <link rel="icon" href="../favicon-32x32.png">
+    <script src="vtb-data.js"></script>
+    <script>
+        function showExchange() {
+            let table = document.getElementById('vtb-table');
+            table.innerHTML = `
+            <tr>
+                <th>Дата</th>
+                <th>Цена, руб</th>
+                <th>Изменение</th>
+            </tr>`;
+            for(let i = 0; i < vtb.length; i++) {
+                let tr = document.createElement('tr');
+                let td1 = document.createElement('td');
+                let td2 = document.createElement('td');
+                let td3 = document.createElement('td');
+                td1.innerHTML = dates[i];
+                td2.innerHTML = vtb[i];
+                if(i==0) {
+                    td3.innerHTML = '&mdash;';
+                } else {
+                    let diff = (vtb[i] - vtb[i-1]).toFixed(2);
+                    td3.innerHTML = diff;
+                    if(diff < 0) {
+                        td3.style.color = 'red';
+                    }
+                    if(diff > 0) {
+                        td3.style.color = 'green';
+                    }
+                }
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                tr.appendChild(td3);
+                table.appendChild(tr);
+            }
+
+            let sum = 0;
+            for(let i = 0; i < vtb.length; i++) {
+                sum += vtb[i];
+            }
+            let average = (sum/vtb.length).toFixed(2);
+            let minimum = Math.min(...vtb);
+            let maximum = Math.max(...vtb);
+
+            let output = document.getElementById('detail');
+            output.innerHTML = `
+            Среднее значение: ${average} руб<br>
+            Минимальное значение: ${minimum} руб<br>
+            Максимальное значение: ${maximum} руб<br>`;
+
+            let button = document.querySelector('button');
+            button.style.display = "none";
+        }
+    </script>
+    <style>
+        #vtb-table {
+            text-align: center;
+        }
+        #detail {
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+        <button onclick="showExchange()">Курс акций ВТБ</button>
+        <table border="1" cellpadding="5" id="vtb-table"></table>
+        <div id="detail"></div>
+    </main>
+
+    <footer>
+        &copy; Иван Стародубцев, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
