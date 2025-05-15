@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стародубцев Иван Алексеевич. Температура</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16.png">
+    <link rel="icon" href="../favicon-32x32.png">
+    <script>
+        function showTemp() {
+            const minTemp = [];
+            const maxTemp = [];
+
+            for (let i = 0; i < 30; i++) {
+                let dayMin = Math.floor(Math.random()*7 + 5);
+                let dayMax = dayMin+Math.floor(Math.random()*15 + 3);
+                minTemp.push(dayMin);
+                maxTemp.push(dayMax);
+            }
+
+            const highest = Math.max(...maxTemp);
+            const chartHeight = document.getElementById('chart').clientHeight;
+
+            for (let i = 0; i < 30; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'bar';
+                bar.innerHTML = `
+                <div class="maximum" style="height: ${chartHeight*((maxTemp[i]-minTemp[i])/highest*0.9)}px;">${maxTemp[i]}°C</div>
+                <div class="minimum" style="height: ${chartHeight*(minTemp[i]/highest*0.9)}px;">${minTemp[i]}°C</div>
+                <div class="number">${i + 1}</div>
+                `;
+
+                chart.appendChild(bar);
+            }
+
+            const dayInput = document.getElementById('day');
+            dayInput.addEventListener('input', e => {
+                const day = parseInt(e.target.value);
+                const columns = [...document.querySelectorAll('.bar')];
+                const minOutput = document.getElementById('min-temp');
+                const maxOutput = document.getElementById('max-temp');
+
+                columns.forEach(bar => {
+                    bar.classList.remove('selected');
+                });
+                
+                minOutput.textContent = '';
+                maxOutput.textContent = '';
+
+                if(day >= 1 && day <= 30) {
+                    const selected = columns[day-1];
+                    selected.classList.add('selected');
+                    minOutput.textContent = minTemp[day-1] + '°C';
+                    maxOutput.textContent = maxTemp[day-1] + '°C';
+                }
+            });
+        }
+    </script>
+    <style>
+        #chart {
+            width: max-content;
+            height: 400px;
+            background-color: aliceblue;
+            border: 3px solid steelblue;
+            margin: 0% auto;
+            display: flex;
+            align-items: flex-end;
+        }
+        #info {
+            text-align: center;
+            padding-top: 50px;
+        }
+        .bar {
+            width: 30px;
+            font-size: 12px;
+            border: 1px solid steelblue;
+            position: relative;
+        }
+        .number {
+            position: absolute;
+            bottom: -25px;
+            text-align: center;
+            font-size: 16px;
+            width: 100%;
+        }
+        .maximum {
+            background-color: lightsalmon;
+            text-align: center;
+        }
+        .minimum {
+            background-color: lightblue;
+            text-align: center;
+        }
+        .selected {
+            filter: saturate(500%);
+        }
+    </style>
+</head>
+<body onload="showTemp()">
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+    </header>
+
+    <main>
+        <h1>Температура за месяц</h1>
+        <div id="chart"></div>
+        <div id="info">
+            <label>Выберите день: <input type="number" id="day"></label> 
+            <div>Минимальная температура: <span id="min-temp"></span></div>
+            <div>Максимальная температура: <span id="max-temp"></span></div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Иван Стародубцев, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
