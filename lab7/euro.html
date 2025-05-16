@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стародубцев Иван Алексеевич. Курс евро</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16.png">
+    <link rel="icon" href="../favicon-32x32.png">
+    <script>
+        function getEuroExchangeRate() {
+            const url = "https://www.cbr-xml-daily.ru/daily_json.js";
+            fetch(url)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(json) {
+                    const today = new Date(json.Date).toLocaleDateString('ru-RU');
+                    const todayValue = json.Valute.EUR.Value;
+                    const previousValue = json.Valute.EUR.Previous;
+                    document.getElementById('info').innerHTML = `
+                    Дата: ${today}<br>
+                    Курс евро: ${todayValue} руб<br>
+                    Прошлый курс: ${previousValue} руб<br>
+                    Изменение: ${(todayValue-previousValue).toFixed(4)} руб`;
+                })
+        }
+    </script>
+    <style>
+        #info {
+            border: 2px solid steelblue;
+            border-radius: 20px;
+            text-align: center;
+            width: 250px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body onload="getEuroExchangeRate()">
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+        <div id="info"></div>
+        <a href="https://www.cbr-xml-daily.ru/">Курсы валют, API</a>
+    </main>
+
+    <footer>
+        &copy; Иван Стародубцев, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
