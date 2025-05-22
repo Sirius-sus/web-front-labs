@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стародубцев Иван Алексеевич. Прогноз погоды</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16.png">
+    <link rel="icon" href="../favicon-32x32.png">
+    <script>
+        function getWeather() {
+            const url = "https://api.open-meteo.com/v1/forecast?latitude=55.0415&longitude=82.9346&hourly=temperature_2m&timezone=Asia%2FBangkok";
+            fetch(url)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(json) {
+                    const morning = json.hourly.temperature_2m[8];
+                    const noon = json.hourly.temperature_2m[12];
+                    const evening = json.hourly.temperature_2m[20];
+
+                    document.getElementById('info').innerHTML = `
+                    Прогноз погоды в Новосибирске на сегодня:<br>
+                    08:00: ${morning}°C<br>
+                    12:00: ${noon}°C<br>
+                    20:00: ${evening}°C`;
+                })
+        }
+    </script>
+    <style>
+        #info {
+            border: 2px solid steelblue;
+            border-radius: 20px;
+            text-align: center;
+            width: 250px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body onload="getWeather()">
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+        <div id="info"></div>
+        <a href="https://open-meteo.com/">Прогноз погоды, API</a>
+    </main>
+
+    <footer>
+        &copy; Иван Стародубцев, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
