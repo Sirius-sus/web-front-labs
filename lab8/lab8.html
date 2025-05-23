@@ -20,13 +20,18 @@
     <main>
         <div id="app">
             <h1 :title="messageRus">{{ message }}</h1>
-            <p>Счётчик: {{ counter }}</p>
-            <button @click="incCounter" v-if="counter < 10" class="btn btn-success">
-                <i class="bi bi-arrow-up"></i>
-            </button>
-            <button @click="decCounter" v-if="counter > 0" class="btn btn-danger">
-                <i class="bi bi-arrow-down"></i>
-            </button>
+
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h2 class="card-title">Счётчик: {{ counter }}</h2>
+                    <button @click="incCounter" v-if="counter < 10" class="btn btn-success">
+                        <i class="bi bi-arrow-up"></i>
+                    </button>
+                    <button @click="decCounter" v-if="counter > 0" class="btn btn-danger">
+                        <i class="bi bi-arrow-down"></i>
+                    </button>
+                </div>
+            </div>
             <hr>
 
             <div class="card" style="width: 18rem;">
@@ -46,9 +51,15 @@
                     <h2 class="card-title">Цветы</h2>
                     <ul class="list-group">
                         <li v-for="(flower, id) in flowers" class="list-group-item">
-                            {{ flower }} <button @click="edit(id, flower)">?</button>
+                            {{ flower }} <button @click="edit(id, flower)" class="btn btn-light">
+                                <i class="bi bi-pen"></i>
+                            </button>
+                            <button @click="remove(id)" class="btn btn-danger">
+                                <i class="bi bi-trash"></i>
+                            </button>
                         </li>
                     </ul>
+                    <button @click="add" class="btn btn-success">Добавить цветок</button>
                 </div>
             </div>
             <hr>
@@ -135,6 +146,15 @@
                 },
                 sum() {
                     this.result = this.a + this.b;
+                },
+                remove(id) {
+                    this.flowers.splice(id, 1);
+                },
+                add() {
+                    let newFlower = prompt('Введите имя нового цветка:');
+                    if (newFlower) {
+                        this.flowers.push(newFlower);
+                    }
                 },
             }
         }).mount('#app');
