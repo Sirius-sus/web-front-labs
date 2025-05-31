@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ПАО 'ЗВЕЗДА'</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16.png">
+    <link rel="icon" href="../favicon-32x32.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let todayValue = 0;
+
+        function getExchangeRate() {
+            const url = "https://www.cbr-xml-daily.ru/daily_json.js";
+            fetch(url)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(json) {
+                    const today = new Date(json.Date).toLocaleDateString('ru-RU');
+                    todayValue = json.Valute.KZT.Value;
+                    document.getElementById('info').innerHTML = `
+                    Курс тенге на сегодня: ${(todayValue/100).toFixed(4)} руб`;
+                })
+        }
+
+        function convertToKZT() {
+            const rub = parseFloat(document.getElementById("rub").value);
+            if (!isNaN(rub)) {
+                document.getElementById("kzt").value = (rub / (todayValue / 100)).toFixed(2);
+            }
+        }
+
+        function convertToRUB() {
+            const kzt = parseFloat(document.getElementById("kzt").value);
+            if (!isNaN(kzt)) {
+                document.getElementById("rub").value = (kzt * (todayValue / 100)).toFixed(2);
+            }
+        }
+
+        function loadChart() {
+            const chartCanvas = document.createElement("canvas");
+            document.getElementById("chart").appendChild(chartCanvas);
+
+            const today = new Date();
+            const start = new Date();
+            start.setDate(today.getDate() - 30);
+
+            function formatDate(date) {
+                return date.toLocaleDateString("ru-RU").split(".").join("/");
+            }
+
+            const targetURL = `https://www.cbr.ru/scripts/XML_dynamic.asp?date_req1=${formatDate(start)}&date_req2=${formatDate(today)}&VAL_NM_RQ=R01335`;
+            const proxyURL = `https://api.allorigins.win/get?url=${encodeURIComponent(targetURL)}`;
+
+            fetch(proxyURL)
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    const str = data.contents;
+                    const parser = new DOMParser();
+                    const xml = parser.parseFromString(str, "text/xml");
+                    const records = xml.getElementsByTagName("Record");
+
+                    const labels = [];
+                    const rates = [];
+
+                    for (let record of records) {
+                        const date = record.getAttribute("Date");
+                        const valueNode = record.getElementsByTagName("Value")[0];
+                        if (valueNode) {
+                            const value = parseFloat(valueNode.textContent.replace(",", "."))/100;
+                            labels.push(date);
+                            rates.push(value.toFixed(4));
+                        }
+                    }
+
+                    const ctx = chartCanvas.getContext("2d");
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Курс тенге (в рублях)',
+                                data: rates,
+                                backgroundColor: '#3835BC',
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            onClick: (e, elements) => {
+                                if (elements.length > 0) {
+                                    const index = elements[0].index;
+                                    alert(`Дата: ${labels[index]}\nКурс: ${rates[index]} руб`);
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: false
+                                }
+                            }
+                        }
+                    });
+                })
+        }
+    </script>
+    <style>
+        #converter {
+            margin: 10px 0px;
+        }
+        a {
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body onload="getExchangeRate(), loadChart()">
+    <a name="top"></a>
+    <header>
+        <a href="index.html" class="logo" style="display: block;">
+            <img src="images/logo.jpg" alt="ПАО ЗВЕЗДА">
+        </a>
+        <div class="menu">
+            <a href="index.html">Главная</a>
+            <a href="news.html">Новости</a>
+            <a href="currency.html">Курс валют</a>
+            <a href="contact.html">Контакты</a>
+            <a href="video.html">Видео</a>
+        </div>
+    </header>
+
+    <main>
+        <h1>Курс казахстанского тенге к рублю</h1>
+        <hr>
+        <div id="info"></div>
+        <div id="converter">
+            <label>Рубли: <input type="number" id="rub" oninput="convertToKZT()"></label>
+            <label>Тенге: <input type="number" id="kzt" oninput="convertToRUB()"></label>
+        </div>
+        <a href="https://www.cbr-xml-daily.ru/">Курсы валют, API</a>
+        
+        <hr>
+        <div id="chart"></div>
+        <a href="https://www.cbr.ru/development/sxml/">Получение данных, используя XML | Банк России</a>
+    </main>
+    <a href="#top" class="back-to-top" title="Наверх">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+</body>
+</html>
