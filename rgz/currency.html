@@ -112,7 +112,7 @@
         #converter {
             margin: 10px 0px;
         }
-        a {
+        #source {
             font-size: 12px;
         }
     </style>
@@ -140,11 +140,11 @@
             <label>Рубли: <input type="number" id="rub" oninput="convertToKZT()"></label>
             <label>Тенге: <input type="number" id="kzt" oninput="convertToRUB()"></label>
         </div>
-        <a href="https://www.cbr-xml-daily.ru/">Курсы валют, API</a>
+        <a href="https://www.cbr-xml-daily.ru/" id="source">Курсы валют, API</a>
         
         <hr>
         <div id="chart"></div>
-        <a href="https://www.cbr.ru/development/sxml/">Получение данных, используя XML | Банк России</a>
+        <a href="https://www.cbr.ru/development/sxml/" id="source">Получение данных, используя XML | Банк России</a>
     </main>
     <a href="#top" class="back-to-top" title="Наверх">
         <i class="bi bi-arrow-up"></i>
